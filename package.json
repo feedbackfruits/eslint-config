@@ -1,25 +1,32 @@
 {
   "name": "@feedbackfruits/eslint-config",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Shared eslint config for all Node.js/Typescript-based projects",
-  "main": ".eslintrc.json",
+  "main": "eslint.config.mjs",
   "license": "UNLICENSED",
   "files": [
-    ".eslintrc.json"
+    "eslint.config.mjs"
   ],
+  "scripts": {
+    "validate": "eslint chewtoy.ts"
+  },
   "peerDependencies": {
-    "@typescript-eslint/eslint-plugin": ">= 5",
-    "@typescript-eslint/parser": ">= 5",
-    "eslint": ">= 8",
+    "@typescript-eslint/eslint-plugin": ">= 7",
+    "@typescript-eslint/parser": ">= 7",
+    "eslint": ">= 9",
     "eslint-plugin-import": ">= 2"
   },
   "devDependencies": {
-    "@types/node": "18.11.9",
-    "@typescript-eslint/eslint-plugin": "5.44.0",
-    "@typescript-eslint/parser": "5.44.0",
-    "eslint": "8.28.0",
-    "eslint-plugin-import": "2.26.0",
-    "typescript": "4.9.3"
+    "@eslint/compat": "1.1.0",
+    "@eslint/eslintrc": "3.1.0",
+    "@eslint/js": "9.5.0",
+    "@types/node": "20.14.8",
+    "@typescript-eslint/eslint-plugin": "7.13.1",
+    "@typescript-eslint/parser": "7.13.1",
+    "eslint": "9.5.0",
+    "eslint-plugin-import": "2.29.1",
+    "globals": "15.6.0",
+    "typescript": "5.5.2"
   },
   "publishConfig": {
     "access": "public",

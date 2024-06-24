@@ -1,19 +1,51 @@
-{
-  "extends": [
-    "eslint:recommended",
-    "plugin:import/recommended",
-    "plugin:import/typescript",
-    "plugin:@typescript-eslint/recommended"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": 2020,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "legacyDecorators": true
-    }
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+import globals from "globals";
+import js from "@eslint/js";
+import tsParser from "@typescript-eslint/parser";
+import { fixupConfigRules } from "@eslint/compat";
+import { FlatCompat } from "@eslint/eslintrc";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+  allConfig: js.configs.all
+});
+
+export default [...fixupConfigRules(compat.extends(
+  "eslint:recommended",
+  "plugin:import/recommended",
+  "plugin:import/typescript",
+  "plugin:@typescript-eslint/recommended",
+)), {
+  languageOptions: {
+    globals: {
+      ...globals.node,
+    },
+
+    parser: tsParser,
+    ecmaVersion: 2020,
+    sourceType: "module",
+
+    parserOptions: {
+      ecmaFeatures: {
+        legacyDecorators: true,
+      },
+    },
   },
-  "rules": {
+
+  settings: {
+    "import/resolver": {
+      node: {
+        extensions: [".js", ".jsx", ".ts", ".tsx", ".d.ts"],
+      },
+    },
+  },
+
+  rules: {
     "@typescript-eslint/ban-types": 0,
     "@typescript-eslint/camelcase": 0,
     "@typescript-eslint/explicit-module-boundary-types": 0,
@@ -24,7 +56,7 @@
     "@typescript-eslint/prefer-as-const": 0,
     "array-type": 0,
     "arrow-parens": 0,
-    "curly": 0,
+    curly: 0,
     "default-case-last": 1,
     "import/export": 0,
     "import/no-deprecated": 2,
@@ -53,19 +85,9 @@
     "object-literal-sort-keys": 0,
     "ordered-imports": 0,
     "prefer-const": 1,
-    "quotes": [2, "single"],
+    quotes: [2, "single"],
     "space-before-function-paren": 0,
     "trailing-comma": 0,
-    "yoda": 1
+    yoda: 1,
   },
-  "env": {
-    "node": true
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx", ".d.ts"]
-      }
-    }
-  }
-}
+}];
