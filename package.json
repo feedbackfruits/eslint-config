@@ -11,8 +11,8 @@
     "validate": "eslint chewtoy.ts"
   },
   "peerDependencies": {
-    "@typescript-eslint/eslint-plugin": ">= 7",
-    "@typescript-eslint/parser": ">= 7",
+    "@typescript-eslint/eslint-plugin": ">= 8",
+    "@typescript-eslint/parser": ">= 8",
     "eslint": ">= 9",
     "eslint-plugin-import": ">= 2"
   },
