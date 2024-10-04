@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+      - master
+
+env:
+  NODE_VERSION: '20'
 
 jobs:
   release:
@@ -14,7 +18,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           registry-url: https://npm.pkg.github.com
-          node-version: '14'
+          node-version: ${{ env.NODE_VERSION }}
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -26,7 +30,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           registry-url: https://registry.npmjs.org
-          node-version: '14'
+          node-version: ${{ env.NODE_VERSION }}
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
