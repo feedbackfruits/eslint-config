@@ -1,0 +1,40 @@
+name: Auto-merge
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+
+permissions: write-all
+
+env:
+  MAJOR_REVIEW_TEAM: "fdebijl"
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+      - name: Fetch dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Auto-approve minor/patch bumps
+        if: ${{  steps.metadata.outputs.update-type == 'version-update:semver-minor' || steps.metadata.outputs.update-type == 'version-update:semver-patch'  }}
+        run: gh pr review --approve "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Tag major bumps and assign reviewers
+        if: ${{steps.metadata.outputs.update-type == 'version-update:semver-major'}}
+        run: gh pr edit  "$PR_URL" --add-label "major" --add-reviewer ${{ env.MAJOR_REVIEW_TEAM }}
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      - name: Auto-merge
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

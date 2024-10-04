@@ -43,7 +43,7 @@ export default [
 ];
 ```
 
-Legacy config:
+Legacy config:  
 *.eslintrc.json*
 ```json
 {
