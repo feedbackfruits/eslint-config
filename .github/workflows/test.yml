@@ -1,0 +1,25 @@
+name: Test
+
+on: [push]
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  chewtoy:
+    name: Chewtoy validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Enable Corepack
+        run: corepack enable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+      - name: Validate against Chewtoy
+        run: yarn validate
