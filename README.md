@@ -11,10 +11,10 @@ yarn add -DE @feedbackfruits/eslint-config
 Flat config:
 *eslint.config.mjs*
 ```js
-import feedbackfruits from '@feedbackfruits/eslint-config';
+import fbfConfig from '@feedbackfruits/eslint-config';
 
 export default [
-  ...feedbackfruits
+  ...fbfConfig
 ];
 ```
 
@@ -43,7 +43,7 @@ export default [
 ];
 ```
 
-Legacy config:  
+Legacy config:
 *.eslintrc.json*
 ```json
 {
