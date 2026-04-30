@@ -6,8 +6,13 @@ on:
       - main
       - master
 
+permissions:
+  id-token: write
+  contents: write
+  packages: write
+
 env:
-  NODE_VERSION: '20'
+  NODE_VERSION: '24'
 
 jobs:
   release:
@@ -15,10 +20,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - name: Enable Corepack
+        run: corepack enable
       - uses: actions/setup-node@v6
         with:
           registry-url: https://npm.pkg.github.com
           node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -27,10 +37,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - name: Enable Corepack
+        run: corepack enable
       - uses: actions/setup-node@v6
         with:
-          registry-url: https://registry.npmjs.org
+          registry-url: 'https://registry.npmjs.org'
           node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
       - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
