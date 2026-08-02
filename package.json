@@ -2,7 +2,7 @@
   "name": "@feedbackfruits/eslint-config",
   "description": "Shared eslint config for all Node.js/Typescript-based projects",
   "author": "FeedbackFruits <media@feedbackfruits.com>",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
@@ -15,25 +15,23 @@
   "scripts": {
     "validate": "eslint chewtoy.ts"
   },
+  "dependencies": {
+    "@eslint/js": "^10.0.1",
+    "globals": "^17.8.0",
+    "typescript-eslint": "^8.65.0"
+  },
   "peerDependencies": {
-    "@typescript-eslint/eslint-plugin": ">= 8",
-    "@typescript-eslint/parser": ">= 8",
-    "eslint": ">= 9",
-    "eslint-plugin-import": ">= 2"
+    "eslint": ">= 10",
+    "eslint-plugin-import": ">= 2.30"
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.3.6",
-    "@eslint/js": "10.0.1",
     "@types/eslint__js": "9.14.0",
     "@types/node": "22.19.21",
-    "@typescript-eslint/eslint-plugin": "8.64.0",
-    "@typescript-eslint/parser": "8.65.0",
     "eslint": "10.8.0",
     "eslint-import-resolver-typescript": "4.4.5",
     "eslint-plugin-import": "2.32.0",
-    "globals": "17.8.0",
-    "typescript": "6.0.3",
-    "typescript-eslint": "8.65.0"
+    "typescript": "6.0.3"
   },
   "publishConfig": {
     "access": "public",

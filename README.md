@@ -1,6 +1,9 @@
 # FeedbackFruits eslint-config
 Shared eslint config for all Node.js/Typescript-based projects
 
+Requires `eslint >= 10` and `eslint-plugin-import >= 2.30` in the consuming project;
+everything else the config needs is shipped as a regular dependency.
+
 Usage:
 ```sh
 pnpm install -DE @feedbackfruits/eslint-config
@@ -15,17 +18,8 @@ export default [
 ];
 ```
 
-Legacy config:
-*.eslintrc.json*
-```json
-{
-  "extends": "@feedbackfruits"
-}
-```
-
 Any rules or extra environments can be overriden by adding the config keys as usual:
 
-Flat config:
 *eslint.config.mjs*
 ```js
 import feedbackfruits from '@feedbackfruits/eslint-config';
@@ -38,15 +32,4 @@ export default [
     }
   }
 ];
-```
-
-Legacy config:
-*.eslintrc.json*
-```json
-{
-  "extends": "@feedbackfruits",
-  "rules": {
-    "no-console": "off"
-  }
-}
 ```
