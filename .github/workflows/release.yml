@@ -6,10 +6,7 @@ on:
       - main
       - master
 
-permissions:
-  id-token: write
-  contents: write
-  packages: write
+permissions: {}
 
 env:
   NODE_VERSION: '24'
@@ -18,6 +15,9 @@ jobs:
   release:
     name: Release (GH)
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # needed for checkout
+      packages: write # needed to publish to GitHub Packages
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Enable Corepack
@@ -35,6 +35,9 @@ jobs:
   release-npm:
     name: Release (NPM)
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # needed for checkout
+      id-token: write # needed for npm trusted publishing (OIDC)
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Enable Corepack
