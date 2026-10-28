@@ -19,7 +19,5 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
-        env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
       - name: Validate against Chewtoy
         run: pnpm run validate
